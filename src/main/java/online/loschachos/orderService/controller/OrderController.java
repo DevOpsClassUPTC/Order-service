@@ -1,9 +1,13 @@
 package online.loschachos.orderService.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +29,10 @@ public class OrderController {
     public ResponseEntity<OrderDTO> saveOrder(@RequestBody OrderDTOFromFE orderDetails) {
         OrderDTO orderSaveInDB = orderService.saveOrderInDB(orderDetails);
         return new ResponseEntity<>(orderSaveInDB, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/fetchByRestaurantId/{restaurantId}")
+    public List<OrderDTO> getOrdersByRestaurantId(@PathVariable Long restaurantId) {
+        return orderService.getOrdersByRestaurantId(restaurantId);
     }
 }
