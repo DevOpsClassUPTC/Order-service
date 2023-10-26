@@ -12,16 +12,16 @@ import online.loschachos.orderService.entity.Sequence;
 
 @Service
 public class SequenceGenerator {
-	
+
 	@Autowired
 	private MongoOperations mongoOperations;
-	
+
 	public Long generateNextOrderId() {
 		Sequence counter = mongoOperations.findAndModify(
 				query(where("_id").is("sequence")),
 				new Update().inc("sequence", 1),
 				options().returnNew(true).upsert(true),
 				Sequence.class);
-		return counter.getSequence();
+		return counter != null ? counter.getSequence() : 1;
 	}
 }
