@@ -1,5 +1,6 @@
 server:
   port: 9095
+
 eureka:
   client:
     service-url:
@@ -9,10 +10,7 @@ spring:
   application:
     name: ORDER-SERVICE
   data:
-    mongodb: 
-      uri: mongodb://localhost:27017/orderdb
-      host: localhost
-      port: 27017
-      database: orderdb
+    mongodb:
+      uri: mongodb+srv://loschachos:qwerty12345@cluster0.ulmgvow.mongodb.net/
       repositories:
         enabled: true
